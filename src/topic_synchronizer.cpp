@@ -9,6 +9,7 @@
 #include "sensor_msgs/msg/point_cloud2.hpp"
 #include "sensor_msgs/msg/imu.hpp"
 #include "visualization_msgs/msg/marker.hpp"
+#include "nav_msgs/msg/odometry.hpp"
 
 class TopicHandlerBase {
 public:
@@ -84,6 +85,7 @@ protected:
 
         if (mode_ == "now") {
             msg->header.stamp = now;
+            msg->header.frame_id = "track";
         } 
         else if (mode_ == "relative") {
             // il primo messaggio in assoluto definisce il tempo zero
@@ -190,6 +192,11 @@ private:
         else if (type == "marker") {
             RCLCPP_INFO(this->get_logger(), "Creazione handler per topic '%s' di tipo Marker con fattore di downsampling %d e ritardo %d ms", name.c_str(), factor, ret);
             handler = std::make_shared<TypedTopicHandler<visualization_msgs::msg::Marker>>(
+                this, name, mode, global_start_time_, global_start_time_set_, factor, ret);
+        }
+        else if (type == "odom") {
+            RCLCPP_INFO(this->get_logger(), "Creazione handler per topic '%s' di tipo Odometry con fattore di downsampling %d e ritardo %d ms", name.c_str(), factor, ret);
+            handler = std::make_shared<TypedTopicHandler<nav_msgs::msg::Odometry>>(
                 this, name, mode, global_start_time_, global_start_time_set_, factor, ret);
         }
         else {

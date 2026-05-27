@@ -3,9 +3,9 @@ topic_synchronizer:
     # Modalità timestamp: "now" (tempo corrente) o "relative" (partendo da 0 all'arrivo del primo msg)
     timestamp_mode: "now"
     
-    topic_names: ["/lidar_points", "/imu/data", "/lidar_imu"]
+    topic_names: ["/fast_limo/state"]
     # Tipi di topic corrispondenti: "pcl" (PointCloud2), "imu" (Imu), "marker" (Marker)
-    topic_types: ["pcl", "imu", "imu"]
+    topic_types: ["odom"]
     # Fattore di downsampling: 1 = pubblica tutti, 2 = uno ogni 2, 3 = uno ogni 3, ecc.
-    downsampling_factors: [1, 1, 1]
-    retarder: [0, 3000, 0]  # Ritardo in millisecondi da aggiungere a ciascun topic
+    downsampling_factors: [1]
+    retarder: [0]  # Ritardo in millisecondi da aggiungere a ciascun topic

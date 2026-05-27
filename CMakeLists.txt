@@ -14,7 +14,7 @@ find_package(std_msgs REQUIRED)
 find_package(nav_msgs REQUIRED)
 
 add_executable(topic_synchronizer src/topic_synchronizer.cpp)
-ament_target_dependencies(topic_synchronizer rclcpp sensor_msgs visualization_msgs)
+ament_target_dependencies(topic_synchronizer rclcpp sensor_msgs visualization_msgs nav_msgs)
 
 install(TARGETS
   topic_synchronizer
